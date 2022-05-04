@@ -272,3 +272,52 @@ ReactDOM.render(
     <MailBox mails={messages}/>,
     root
 )
+
+const numbers = [1,2,3,4,5,6];
+
+const LiItems = numbers.map((number)=>(
+                                        <li key={number.toString()} id={number}>{number}</li>
+                                    ));
+
+ReactDOM.render(
+    <ul>{LiItems}</ul>,
+    root
+)
+
+class NameForm extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            value:''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    render()
+    {
+        // make the submit button update the state 
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label htmlFor="name">Name</label>
+                <input type="text" id="name" value={this.state.value} onChange={this.handleChange}/>
+                <input type="submit" value="submit name"/>
+            </form>
+        )
+    }
+
+    handleChange(e)
+    {
+        this.setState({
+            value:e.target.value
+        })
+    }
+
+    handleSubmit(e)
+    {
+        e.preventDefault();
+        alert("the name was submitted : "+this.state.value);
+    }
+}
